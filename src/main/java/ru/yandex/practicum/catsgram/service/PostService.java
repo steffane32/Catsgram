@@ -110,6 +110,10 @@ public class PostService {
         return post;
     }
 
+    public Optional<Post> findById(Long id) {
+        return Optional.ofNullable(posts.get(id));
+    }
+
     private long getNextId() {
         long currentMaxId = posts.keySet()
                 .stream()
