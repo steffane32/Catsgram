@@ -20,6 +20,12 @@ public class UserController {
         return userService.findAll();
     }
 
+    // НОВЫЙ ЭНДПОИНТ: получение пользователя по ID
+    @GetMapping("/{id}")
+    public User findUserById(@PathVariable("id") Long id) {
+        return userService.findUserByIdOrThrow(id);
+    }
+
     @PostMapping
     public User create(@RequestBody User user) {
         return userService.create(user);

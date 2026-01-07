@@ -81,9 +81,18 @@ public class UserService {
         return oldUser;
     }
 
-    // НОВЫЙ МЕТОД: поиск пользователя по ID (для проверки автора поста)
+    // Метод для поиска пользователя по ID (возвращает Optional)
     public Optional<User> findUserById(Long id) {
         return Optional.ofNullable(users.get(id));
+    }
+
+    // НОВЫЙ МЕТОД: получение пользователя по ID с исключением
+    public User findUserByIdOrThrow(Long id) {
+        Optional<User> userOptional = findUserById(id);
+        if (userOptional.isEmpty()) {
+            throw new NotFoundException("Пользователь с id = " + id + " не найден");
+        }
+        return userOptional.get();
     }
 
     private long getNextId() {
